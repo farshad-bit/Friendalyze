@@ -39,6 +39,7 @@ jobs:
         run: |
           cd backend
           mvn clean package
+          mkdir -p target
 
   docker-build-and-push:
     needs: build-and-test
