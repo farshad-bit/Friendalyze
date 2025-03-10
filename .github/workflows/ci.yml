@@ -56,7 +56,7 @@ jobs:
 
       - name: Build and Push Docker Image
         run: |
-          docker build -t farshad021/friendalyze:latest .
+          docker build -t farshad021/friendalyze:latest -f backend/Dockerfile backend/
           docker tag farshad021/friendalyze:latest farshad021/friendalyze:${{ github.sha }}
           docker push farshad021/friendalyze:latest
           docker push farshad021/friendalyze:${{ github.sha }}
