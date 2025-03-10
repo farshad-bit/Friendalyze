@@ -5,7 +5,7 @@ FROM openjdk:19-jdk
 WORKDIR /app
 
 # Copy the built JAR file into the container
-COPY backend/target/friendalyze-1.0.0.jar app.jar
+COPY ../target/friendalyze-1.0.0.jar app.jar
 
 # Expose the application port
 EXPOSE 8080

@@ -41,6 +41,9 @@ jobs:
           mvn clean package
           mkdir -p target
 
+      - name: Move JAR file to backend
+        run: mv target/friendalyze-1.0.0.jar backend/target/friendalyze-1.0.0.jar
+
   docker-build-and-push:
     needs: build-and-test
     runs-on: ubuntu-latest
