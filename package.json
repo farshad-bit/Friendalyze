@@ -1,0 +1,23 @@
+{
+  "name": "friendalyze",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+  "test": "echo \"Error: no test specified\" && exit 1",
+  "sequelize": "npx sequelize-cli --config db/config/config.js --migrations-path db/migrations --models-path db/models --seeders-path db/seeders",
+  "mavenbuild": "mvn clean package"
+},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "pg": "^8.13.3",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.37.6"
+  },
+  "devDependencies": {
+    "dotenv": "^16.4.7",
+    "sequelize-cli": "^6.6.2"
+  }
+}
