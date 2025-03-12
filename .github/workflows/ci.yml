@@ -39,7 +39,8 @@ jobs:
         run: |
           cd backend/user-service
           mvn clean package
-          ls -l target/
+          mkdir -p ../../backend/user-service/target/
+          mv target/friendalyze-1.0.0.jar ../../backend/user-service/target/friendalyze-1.0.0.jar
 
       - name: Check JAR file
         run: ls -l backend/user-service/target/
