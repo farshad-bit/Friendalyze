@@ -29,7 +29,7 @@ jobs:
           ls -l target/
 
       - name: Save JAR artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v2
         with:
           name: friendalyze-jar
           path: backend/user-service/target/friendalyze-1.0.0.jar
