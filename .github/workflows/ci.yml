@@ -41,6 +41,9 @@ jobs:
           mvn clean package
           ls -l target/
 
+      - name: Check if Maven build was successful
+        run: ls -l backend/user-service/         
+
       - name: Check JAR file existence
         run: ls -l backend/user-service/target/
 
