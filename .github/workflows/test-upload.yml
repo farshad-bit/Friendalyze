@@ -28,7 +28,7 @@ jobs:
           mvn clean test
       - name: Build project
 
-      
+      - name: Build project
         run: |
           cd backend/user-service
           mvn clean package
