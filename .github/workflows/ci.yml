@@ -24,6 +24,7 @@ jobs:
 
       - name: Cache Maven dependencies
         uses: actions/cache@v3
+        continue-on-error: true
         with:
           path: ~/.m2
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
@@ -44,11 +45,12 @@ jobs:
       - name: Check if JAR file exists
         run: ls -l backend/user-service/target/
 
-      - name: Save JAR artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: friendalyze-jar
-          path: backend/user-service/target/friendalyze-1.0.0.jar
+      - name: Package JAR file
+        run: tar -cvf friendalyze.tar backend/user-service/target/friendalyze-1.0.0.jar
+
+      - name: Extract JAR file in Docker build step
+        run: tar -xvf friendalyze.tar -C backend/user-service/target/
+
     
 
   docker-build-and-push:
@@ -58,12 +60,6 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-
-      - name: Restore JAR artifact
-        uses: actions/download-artifact@v3
-        with:
-          name: friendalyze-jar
-          path: backend/user-service/target/
 
       - name: ✅ Check if JAR file exists before Docker build
         run: ls -l backend/user-service/target/
