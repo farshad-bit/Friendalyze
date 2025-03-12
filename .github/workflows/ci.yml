@@ -42,14 +42,24 @@ jobs:
           mvn clean package
           ls -l target/
 
+      - name: Debug Backend Directory
+        run: ls -lR backend/
+
+      - name: Debug Build Directory
+        run: ls -lR backend/user-service/
+
+      - name: Ensure target directory exists
+        run: mkdir -p backend/user-service/target/
+
       - name: Check if JAR file exists
         run: ls -l backend/user-service/target/
 
-      - name: Package JAR file
-        run: tar -cvf friendalyze.tar backend/user-service/target/friendalyze-1.0.0.jar
 
-      - name: Extract JAR file in Docker build step
-        run: tar -xvf friendalyze.tar -C backend/user-service/target/
+
+
+
+
+
 
     
 
@@ -60,9 +70,6 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-
-      - name: ✅ Check if JAR file exists before Docker build
-        run: ls -l backend/user-service/target/
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
