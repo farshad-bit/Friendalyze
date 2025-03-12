@@ -39,10 +39,9 @@ jobs:
         run: |
           cd backend/user-service
           mvn clean package
-          mkdir -p ../../backend/user-service/target/
-          mv target/friendalyze-1.0.0.jar ../../backend/user-service/target/friendalyze-1.0.0.jar
+          ls -l target/
 
-      - name: Check JAR file
+      - name: Check JAR file existence
         run: ls -l backend/user-service/target/
 
 
@@ -53,6 +52,9 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+
+      - name: ✅ Check if JAR file exists (before Docker build)
+        run: ls -l backend/user-service/target/
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2

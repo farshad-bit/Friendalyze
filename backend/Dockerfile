@@ -10,7 +10,7 @@ WORKDIR /app
 COPY src/main/resources/application.properties /app/application.properties 
 
 # Copy the built JAR file into the container
-COPY backend/user-service/target/friendalyze-1.0.0.jar /app.jar
+COPY ./user-service/target/friendalyze-1.0.0.jar /app.jar
 
 # Expose the application port
 EXPOSE 8080
