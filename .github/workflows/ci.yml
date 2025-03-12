@@ -41,11 +41,15 @@ jobs:
           mvn clean package
           ls -l target/
 
+      - name: Debug Backend Directory
+        run: ls -lR backend/
+
       - name: Debug Build Directory
         run: ls -lR backend/user-service/
 
-      - name: Debug Backend Directory
-        run: ls -lR backend/
+
+      - name: Ensure target directory exists
+        run: mkdir -p backend/user-service/target/
 
       - name: Check if Maven build was successful
         run: ls -l backend/user-service/         
