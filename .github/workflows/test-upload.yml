@@ -27,9 +27,15 @@ jobs:
           cd backend
           mvn clean test
 
-          
+
       - name: Build project
         run: |
           cd backend/user-service
           mvn clean package
           ls -l target/
+
+      - name: Save JAR artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: friendalyze-jar
+          path: backend/user-service/target/friendalyze-1.0.0.jar
