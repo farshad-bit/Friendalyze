@@ -3,7 +3,7 @@
 
 
 services:
-  postgres:
+  postgres_db:
     container_name: postgres_db
     image: postgres:15
     restart: always
@@ -13,11 +13,22 @@ services:
       - "5432:5432"
     volumes:
       - pg_data:/var/lib/postgresql/data
+    networks:
+      - postgres_app_network
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "dadi", "-d", "dadasham"]
+      interval: 10s
+      retries: 5
+      timeout: 5s      
 
 volumes:
   pg_data:
 
-
+networks:
+  postgres_app_network:  
+    name:  postgres_app_network
+    driver: bridge
+    external: true
 
 
 

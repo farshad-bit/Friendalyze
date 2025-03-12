@@ -1,3 +1,10 @@
+require('dotenv').config({ path: './.env' });  
+
+// چاپ مقادیر متغیرهای محیطی برای اطمینان از صحت بارگذاری
+console.log("Postgres User:", process.env.POSTGRES_USER); 
+console.log("Postgres Password:", process.env.POSTGRES_PASSWORD); 
+console.log("Postgres DB:", process.env.POSTGRES_DB);
+
 const { Sequelize } = require("sequelize");
 const db = require("./db/models"); // Load models
 

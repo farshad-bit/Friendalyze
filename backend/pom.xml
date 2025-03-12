@@ -1,3 +1,5 @@
+<!-- D:\Projects\Friendalyze\backend\pom.xml -->
+
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -7,12 +9,17 @@
     <groupId>com.example</groupId>
     <artifactId>friendalyze</artifactId>
     <version>1.0.0</version>
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
 
-    <!-- مشخصات پروژه -->
+    <modules>
+        <module>user-service</module> 
+    </modules>    
+
+    <!-- INFO -->
     <properties>
         <java.version>19</java.version>
         <spring.boot.version>3.1.0</spring.boot.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <dependencies>
@@ -37,6 +44,13 @@
             <version>42.6.0</version>
         </dependency>
 
+        <!-- Spring Boot Actuator -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+            <version>${spring.boot.version}</version>
+        </dependency>        
+
         <!-- Sprig Boot Test API -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -56,8 +70,9 @@
     </dependencies>
 
     <build>
+        <finalName>friendalyze-1.0.0</finalName>
         <plugins>
-            <!-- تنظیم نسخه جاوا برای Maven -->
+            <!-- Maven Compiler Plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -68,7 +83,21 @@
                 </configuration>
             </plugin>
 
-            <!-- Spring Boot Maven Plugin -->
+            <!-- Maven JAR Plugin  -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.2.0</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>com.example.friendalyze.FriendalyzeApplication</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+
+            <!-- Maven JAR Plugin
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
@@ -76,8 +105,24 @@
                 <configuration>
                     <mainClass>com.example.friendalyze.FriendalyzeApplication</mainClass>
                 </configuration>
+            </plugin> -->
+
+
+             <!-- Spring Boot Maven Plugin -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring.boot.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
+
     </build>
 
 </project>

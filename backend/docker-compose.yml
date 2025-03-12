@@ -1,0 +1,23 @@
+
+# D:\Projects\Friendalyze\backend\docker-compose.yml
+services:
+  friendalyze:
+    container_name: friendalyze
+    build: .
+    restart: always
+    env_file:
+      - ../.env
+    environment:
+      - DB_HOST=postgres_db
+      - DB_PORT=5432
+    ports:
+      - "8080:8080"
+    networks:
+      - postgres_app_network
+
+
+networks:
+  postgres_app_network:
+    external: true  
+
+
