@@ -29,7 +29,7 @@ jobs:
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
           restore-keys: |
             ${{ runner.os }}-maven-
-
+      
       - name: Build and run tests
         run: |
           cd backend
@@ -41,27 +41,8 @@ jobs:
           mvn clean package
           ls -l target/
 
-      - name: Debug Backend Directory
-        run: ls -lR backend/
-
-      - name: Debug Build Directory
-        run: ls -lR backend/user-service/
-
-      - name: Ensure target directory exists
-        run: mkdir -p backend/user-service/target/
-
-      - name: Check if Maven build was successful
-        run: ls -l backend/user-service/         
-
-      - name: Check JAR file existence
+      - name: Check if JAR file exists
         run: ls -l backend/user-service/target/
-
-      - name: Save JAR artifact
-        uses: actions/upload-artifact@v1
-        with:
-          name: friendalyze-jar
-          path: backend/user-service/target/friendalyze-1.0.0.jar
-
 
   docker-build-and-push:
     needs: build-and-test
@@ -71,17 +52,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Restore JAR artifact
-        uses: actions/download-artifact@v2
-        with:
-          name: friendalyze-jar
-          path: backend/user-service/target/
-
-      - name: ✅ Check if JAR file exists (before Docker build)
+      - name: ✅ Check if JAR file exists before Docker build
         run: ls -l backend/user-service/target/
 
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
+        uses: docker/setup-buildx-action@v2
 
       - name: Log in to DockerHub
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
@@ -92,4 +67,3 @@ jobs:
           docker tag farshad021/friendalyze:latest farshad021/friendalyze:${{ github.sha }}
           docker push farshad021/friendalyze:latest
           docker push farshad021/friendalyze:${{ github.sha }}
-
