@@ -25,6 +25,8 @@ jobs:
 
       - name: Build & Test with Maven
         run: mvn clean test
+        working-directory: backend/user-service
 
       - name: Package Application
         run: mvn clean package
+        working-directory: backend/user-service
