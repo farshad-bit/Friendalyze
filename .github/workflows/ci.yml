@@ -36,7 +36,7 @@ jobs:
 
       - name: Build Docker Image
         run: docker build -t farshad-bit/friendalyze .
-        working-directory: backend/user-service  
+        working-directory: backend 
 
       - name: Push Docker Image to Docker Hub
         run: docker push farshad-bit/friendalyze
